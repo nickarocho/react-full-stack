@@ -26,8 +26,9 @@ class App extends Component {
   /*---------- Helper Methods ----------*/
 
   getInitialState() {
+    let colorIdx = (this.state && this.state.difficultyLevel) || 0;
     return {
-      code: this.genCode(colorTable[0].colors.length),
+      code: this.genCode(colorTable[colorIdx].colors.length),
       selColorIdx: 0,
       guesses: [this.getNewGuess()],
       elapsedTime: 0,
