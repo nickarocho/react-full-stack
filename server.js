@@ -25,5 +25,5 @@ app.get('/*', function(req, res) {
 var port = process.env.PORT || 3001;
 
 app.listen(port, function() {
-    console.log(`Express app runing on port ${}`)
+    console.log(`Express app runing on port ${port}`)
 })
