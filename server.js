@@ -2,8 +2,16 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
+var cors = require('cors');
 
+require('dotenv').config();
+require('./config/database')
+
+var api = require('./routes/api');
 var app = express();
+
+app.use(cors());
 
 app.use(logger('dev'));
 
@@ -11,6 +19,10 @@ app.use(logger('dev'));
 // to serve from the production 'build' folder
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/api', api);
 
 // Put API routes here, before the "catch all"  route
 
@@ -27,3 +39,5 @@ var port = process.env.PORT || 3001;
 app.listen(port, function() {
     console.log(`Express app runing on port ${port}`)
 })
+
+module.exports = app;

@@ -7,6 +7,7 @@ import {
 import './App.css';
 import GamePage from '../GamePage/GamePage';
 import SettingsPage from '../SettingsPage/SettingsPage';
+import ScoresPage from '../ScoresPage/ScoresPage';
 
 let colorTable = [
   {name: 'Easy', colors: ['#7CCCE5', '#FDE47F', '#E04644', '#B576AD']},
@@ -164,6 +165,10 @@ class App extends Component {
                   difficultyLevel={this.state.difficultyLevel}
                   handleDifficultyChange={this.setDifficulty}
                   handleNewGame={this.handleNewGameClick}
+                />
+              }/>
+              <Route exact path='/highscores' render={() => 
+                <ScoresPage
                 />
               }/>
             </Switch>

@@ -34,6 +34,8 @@ const GamePage = (props) => {
             isTiming={props.isTiming}
           />
           <Link className='btn btn-default' style={{margin: '0 10px'}} to='/settings'>Difficulty</Link>
+          <br />
+          <Link className='btn btn-default' style={{margin: '0 10px'}} to='/highscores'>High Scores</Link>
           <NewGameButton handleNewGameClick={props.handleNewGameClick}/>
         </div>
       </div>
