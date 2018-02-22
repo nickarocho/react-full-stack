@@ -28,19 +28,30 @@ class ScoresPage extends Component {
 
     render() {
         return (
-          <div className='Settings'>
-            <header className='header-footer'>High Scores</header>
-            <div>
-                {this.state.highscores.map(score => (
-                    <div>
-                        {score.initials}
-                    </div>
-                ))}
+            <div className='Settings'>
+                <header className='header-footer'>High Scores</header>
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Initials</th>
+                                <th>Guesses</th>
+                                <th>Seconds</th>
+                            </tr>
+                            {this.state.highscores.map(score => (
+                                <tr>
+                                    <td>{score.initials}</td>
+                                    <td>{score.numGuesses}</td>
+                                    <td>{score.seconds}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <Link className='Settings-cancel btn btn-default btn-sm' to='/'>Cancel</Link>
+                </div>
             </div>
-            <div>
-              <Link className='Settings-cancel btn btn-default btn-sm' to='/'>Cancel</Link>
-            </div>
-          </div>
         )
     }
 

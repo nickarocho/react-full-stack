@@ -8,15 +8,18 @@ function getScores(req, res) {
 }
 
 function createNewScore(req, res) {
-    var score = new Score(req.body);
-    credit.save(err => {
-        req.scores.push(score);
-        req.save(function(err) {
-            req.populate('scores', function (err) {
-                res.json(req)
-            });
-        });
-    });
+    console.log(req.body)
+    Score.create(req.body).then(score => res.json(score))
+    // var score = new Score(req.body);
+    // score.save(err => {
+    //     res.json();
+    //     req.scores.push(score);
+    //     req.save(function(err) {
+    //         req.populate('scores', function (err) {
+    //             res.json(req)
+    //         });
+    //     });
+    // });
 }
 
 module.exports = {

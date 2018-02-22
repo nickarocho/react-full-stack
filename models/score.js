@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var scoreSchema = new mongoose.Schema({
-    initials: {type: String, required: true},
+    initials: {type: String},
     numGuesses: {type: Number},
     seconds: {type: Number}
 }, {

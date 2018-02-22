@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import './App.css';
 import GamePage from '../GamePage/GamePage';
 import SettingsPage from '../SettingsPage/SettingsPage';
 import ScoresPage from '../ScoresPage/ScoresPage';
+import API from './../../api/api'
 
 let colorTable = [
   {name: 'Easy', colors: ['#7CCCE5', '#FDE47F', '#E04644', '#B576AD']},
@@ -57,6 +59,18 @@ class App extends Component {
       colors: colorTable[level].colors
     });
   }
+
+  getHighScore = () => {
+    var initials = prompt("HIGH SCORE! Please enter your initials", "###");
+
+    API.postHighScore({
+      initials,
+      numGuesses: this.state.guesses.length,
+      seconds: this.state.finalTime
+    }).then((res) => {
+      return res.redirect("/highscores")
+    }
+    )}
 
   /*---------- Callback Methods ----------*/
 
@@ -126,11 +140,15 @@ class App extends Component {
     // Add a new guess if not a winner
     if (perfect !== 4) guessesCopy.push(this.getNewGuess());
 
+    
     // Finally, update the state with the NEW guesses array
     this.setState(prevState => ({
       guesses: guessesCopy,
       finalTime: (perfect === 4) ? prevState.elapsedTime : 0
-    }));
+    }), () => {
+      if (perfect === 4) this.getHighScore();
+
+    });
   }
 
   handleTick = () => {
